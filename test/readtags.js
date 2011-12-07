@@ -1,11 +1,7 @@
 #!/usr/bin/env node
 
 var argv = process.argv;
-var path = require('path');
-require.paths.unshift(path.join(path.dirname(argv[1]), "..", "lib",
-    "jsctags"));
-
-var ctags = require('ctags'), fs = require('fs'), util = require('util');
+var ctags = require('jsctags/ctags'), fs = require('fs'), util = require('util');
 
 var tags = new ctags.Tags();
 var str = fs.readFileSync(argv[2]);

@@ -40,15 +40,12 @@ var argv = process.argv;
 var path = require('path');
  
 var cwd = path.dirname(argv[1]);
-var libdir = path.join(cwd, "..", "lib");
- 
-require.paths.unshift(path.join(libdir, "jsctags"));
   
 var util = require('util');
 var _ = require('underscore')._;
 var http = require('http');
 var url = require('url');
-var servetypes = require('servetypes');
+var servetypes = require('jsctags/servetypes');
 
 function usage(msg) {
   util.print("usage: " + path.basename(argv[1]) + " [options]\n");
@@ -66,7 +63,7 @@ function usage(msg) {
 
 function parseOpts(argv, callback) {
   var dir = null;
-  var port = 8080;
+  var port = process.env.PORT;
   var service = true;
 
   for (var i = 0; i < argv.length; i++) {
@@ -197,5 +194,5 @@ parseOpts(argv.slice(2), function(err, opts) {
   }
 
   util.log("listening on port " + opts.port + "...");
-  http.createServer(handler).listen(opts.port, "127.0.0.1");
+  http.createServer(handler).listen(opts.port, "0.0.0.0");
 });

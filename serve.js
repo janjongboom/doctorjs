@@ -36,8 +36,7 @@
  *
  * ***** END LICENSE BLOCK ***** */
 
-require.paths.unshift('./lib/jsctags');
-var http = require('http'), paperboy = require('paperboy');
+var http = require('http'), paperboy = require('jsctags/paperboy');
 var util = require('util');
 
 http.createServer(function(req, resp) {
@@ -50,5 +49,5 @@ http.createServer(function(req, resp) {
 			resp.writeHead(404, { "Content-type": "text/plain" });
 			resp.close();
 		});
-}).listen(8080);
+}).listen(process.env.PORT);
 
